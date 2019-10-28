@@ -9,9 +9,20 @@ A self-host-able "serverless" framework for Haskell.
 
 ## Summary
 
-Very loosely, `medusa` reads a string which evaluates to a request handler (or list of handlers), and returns a Wai server exposing those handlers.
+Very loosely, `medusa` reads a string which evaluates to a request handler, and returns a Wai server exposing that handler.
+
 ```haskell
-medusa :: [System.Eval.Utils.Import] -> String -> IO (Either String Network.Wai.Application)
+Medusa.medusa :: [System.Eval.Utils.Import] -> String -> IO (Either String Network.Wai.Application)
+```
+Whether or not this is useful will probably be a matter of opinion.
+
+```haskell
+imports = []
+handler = "const (pure \"Hello World!\" :: Medusa.Face)"
+
+main = do
+  compiled <- Medusa.medusa imports handler
+  either putStrLn (Network.Wai.Handler.Warp.run 8080) compiled
 ```
 
 ## Todo
