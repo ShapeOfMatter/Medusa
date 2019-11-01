@@ -1,0 +1,24 @@
+cabal-version:       3.0
+-- For further documentation, see http://haskell.org/cabal/users-guide/
+
+name:                Medusa
+version:             0.1.0.0
+synopsis:            A self-host-able "serverless" framework for Haskell.
+-- description:
+-- bug-reports:
+license:             MIT
+license-file:        LICENSE
+author:              ShapeOfMatter
+maintainer:          mako@pop-os.laptop
+-- copyright:
+-- category:
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+executable Medusa
+  main-is:             Main.hs
+  -- other-modules:
+  -- other-extensions:
+  build-depends:       base >=4.10 && <4.11
+  -- hs-source-dirs:
+  default-language:    Haskell2010
