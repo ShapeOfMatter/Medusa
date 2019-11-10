@@ -22,9 +22,11 @@ executable Medusa
                       ,UnambiguiousStrings
   -- other-extensions:
   build-depends:       base >=4.11 && <5
+                      ,bytestring
                       ,http-types
                       ,polysemy
                       ,req
+                      ,text
                       ,wai >= 3.2.2
                       ,warp
   -- hs-source-dirs:

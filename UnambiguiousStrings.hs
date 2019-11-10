@@ -4,7 +4,7 @@ import qualified Data.ByteString as SBS
 import qualified Data.ByteString.Lazy as LBS
 import qualified Data.Text as SText
 import Data.Text.Encoding (decodeUtf8', encodeUtf8)
-import Data.Text.IO (putStr)
+import qualified Data.Text.IO as SText.IO
 import qualified Data.Text.Lazy as LText
 
 type SBytes = SBS.ByteString
@@ -32,7 +32,7 @@ lazyDecodeEither = (fmap fromStrictText) . decodeUtf8' . toStrictBytes
 strictEncode = encodeUtf8
 lazyEncode = fromStrictBytes . encodeUtf8 . toStrictText
 
-printSText = putStr
+printSText = SText.IO.putStr
 
 {-
 stBytesFromLzBytes = LBS.toStrict

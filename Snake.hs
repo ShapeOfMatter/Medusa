@@ -3,7 +3,8 @@
 {-# LANGUAGE GADTs, FlexibleContexts, TypeOperators, DataKinds, PolyKinds, ScopedTypeVariables #-}
 
 module Snake (
-
+    Snake (Snake)
+   ,snakeToIO
 ) where
 
 import Polysemy
@@ -14,9 +15,9 @@ import HttpEffect
 import qualified UnambiguiousStrings as US
 
 data Snake = 
-    Snake (Sem [
+    Snake (Sem '[
                 HttpEffect
-               ] Text)
+               ] US.SText)
 
 snakeToIO :: Snake -> IO US.SText
-snakeToIO (Snake s) = runM . httpToIO $ s
+snakeToIO (Snake s) = runM . httpToIO $ ((raiseUnder s) )

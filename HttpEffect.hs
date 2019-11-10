@@ -17,7 +17,7 @@ import Network.HTTP.Req
 
 data HttpEffect m a where
   PerformHttpRequest ::
-    (MonadHttp m, HttpMethod method, HttpBody body, HttpResponse response, HttpBodyAllowed (AllowsBody method) (ProvidesBody body))
+    (HttpMethod method, HttpBody body, HttpResponse response, HttpBodyAllowed (AllowsBody method) (ProvidesBody body))
       => method             -- HTTP method
       -> Url scheme         -- Url—location of resource
       -> body               -- Body of the request
@@ -30,8 +30,7 @@ makeSem ''HttpEffect
 httpToIO :: Member (Embed IO) r => Sem (HttpEffect ': r) a -> Sem r a
 httpToIO =
     interpret 
-        $ \(PerformHttpRequest method url body responseType options)
+        $ \((PerformHttpRequest method url body responseType options) :: HttpEffect m a)
             -> embed 
-                $ runReq defaultHttpConfig
-                    $ req method url body responseType options
+                $ ((runReq defaultHttpConfig $ req method url body responseType options) :: IO a)
 
