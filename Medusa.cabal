@@ -17,10 +17,14 @@ extra-source-files:  CHANGELOG.md
 
 executable Medusa
   main-is:             Main.hs
-  -- other-modules:
+  other-modules:       HttpEffect
+                      ,Snake
+                      ,UnambiguiousStrings
   -- other-extensions:
-  build-depends:       base >=4.10 && <4.11
+  build-depends:       base >=4.11 && <5
                       ,http-types
+                      ,polysemy
+                      ,req
                       ,wai >= 3.2.2
                       ,warp
   -- hs-source-dirs:
